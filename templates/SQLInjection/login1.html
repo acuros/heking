@@ -1,8 +1,8 @@
 {% extends "SQLInjection/base.tpl" %}
 {% block main %}
 <a href="index.html" id="back">뒤로 가기</a>
-<div data-ng-controller="MemberController">
-  <form name="form" id="login-form" data-ng-submit="login(user)">
+<div ng-controller="MemberController">
+  <form name="form" id="login-form" ng-submit="login(user)">
     <fieldset>
       <legend>로그인</legend>
       <dl>
@@ -12,10 +12,6 @@
         <dd><input type="password" id="password" ng-model="user.password" required="required" ></dd>
       </dl>
       <input type="submit" value="로그인">
-      <div data-ng-class="colorClassByQueryValidation(user)">
-        사용자정보에서 정보를 가져온다.<br />
-        조건: <span>아이디가 '{{ user.username }}' 이면서 비밀번호가 '{{ user.password }}'</span>
-      </div>
     </fieldset>
   </form>
   <table id="member-table">
@@ -28,9 +24,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr data-ng-repeat="user in users track by $index"
-        data-ng-click="clickTr(user)"
-        data-ng-class="{selected: user.username == clickedUser.username}">
+    <tr ng-repeat="user in users track by $index" ng-class="getClass(user)">
       <td>{{ user.username }}</td>
       <td>{{ user.password }}</td>
       <td>{{ user.email }}</td>

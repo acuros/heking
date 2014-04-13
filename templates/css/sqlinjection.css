@@ -8,10 +8,21 @@ fieldset {
     padding: 18px;
 }
 
+.valid {
+    color: #6bff6b;
+}
+
+.invalid {
+    color: #ee4466;
+}
+
 #member-table {
     width: 500px;
 }
 #member-table td, #member-table th {
     border: 1px solid #333;
     text-align: center;
+}
+#member-table tr.selected {
+    background-color: #6bff6b;
 }
