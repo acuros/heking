@@ -11,7 +11,6 @@
         <dt><label for="password">비밀번호</label></dt>
         <dd><input type="password" id="password" ng-model="user.password" required="required" ></dd>
       </dl>
-      <input type="submit" value="로그인">
       <div data-ng-class="colorClassByQueryValidation(user)">
         사용자정보에서 정보를 가져온다.<br />
         조건: <span>아이디가 '{{ user.username }}' 이면서 비밀번호가 '{{ user.password }}'</span>
