@@ -40,6 +40,7 @@ def export_htmls(templates):
     env = Environment(loader=FileSystemLoader('templates'))
     for template in templates:
         rendered = env.get_template(template).render()
+        template = 'exported/%s' % template
         prepare_directory(template)
         with open(template, 'w') as f:
             f.write(rendered)
@@ -47,8 +48,11 @@ def export_htmls(templates):
 
 def remake_export_directory():
     if os.path.isdir('exported'):
-        shutil.rmtree('exported')
-    os.mkdir('exported')
+        shutil.rmtree('exported', ignore_errors=True)
+    try:
+        os.mkdir('exported')
+    except:
+        pass
 
 
 def render():
