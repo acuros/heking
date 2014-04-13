@@ -1,5 +1,4 @@
 import os
-import shutil
 import sys
 from jinja2 import Environment, FileSystemLoader
 
@@ -37,7 +36,7 @@ def prepare_directory(path):
 
 
 def export_htmls(templates):
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader('templates'), variable_start_string="{[{", variable_end_string="}]}")
     for template in templates:
         rendered = env.get_template(template).render()
         template = 'exported/%s' % template
@@ -46,18 +45,8 @@ def export_htmls(templates):
             f.write(rendered)
 
 
-def remake_export_directory():
-    if os.path.isdir('exported'):
-        shutil.rmtree('exported', ignore_errors=True)
-    try:
-        os.mkdir('exported')
-    except:
-        pass
-
-
 def render():
     templates = get_templates()
-    remake_export_directory()
     export_htmls(templates)
 
 
@@ -68,7 +57,7 @@ def auto_render():
         try:
             render()
             print datetime.datetime.now().strftime('%H:%M:%S'), 'rendered'
-            time.sleep(2)
+            time.sleep(1)
         except KeyboardInterrupt:
             break
 

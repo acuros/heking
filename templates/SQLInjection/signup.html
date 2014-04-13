@@ -1,0 +1,55 @@
+{% extends "SQLInjection/base.tpl" %}
+{% block head %}
+{[{ super() }]}
+<link rel="stylesheet" href="/css/signup.css" type="text/css">
+{% endblock %}
+{% block main %}
+<script>
+  if(!window.localStorage) {
+    alert('This browser is too old to practice it');
+  }
+  function SignupControl($scope) {
+    $scope.users = JSON.parse(localStorage.getItem('users')) || [];
+    $scope.submit = function(user) {
+      $scope.users.push(user);
+      $scope.form.$setPristine();
+      $scope.user = {};
+      localStorage.setItem('users', JSON.stringify($scope.users));
+    };
+  }
+</script>
+<div ng-controller="SignupControl">
+  <form name="form" id="signup-form"  ng-submit="submit(user)">
+    <fieldset>
+      <legend>Sign up</legend>
+      <dl>
+        <dt><label for="username">Username</label></dt>
+        <dd><input type="text" id="username" ng-model="user.username" required="required"></dd>
+        <dt><label for="password">Password</label></dt>
+        <dd><input type="password" id="password" ng-model="user.password" required="required" ></dd>
+        <dt><label for="email">Email Address</label></dt>
+        <dd><input type="email" id="email" ng-model="user.email" required="required"></dd>
+      </dl>
+      <input type="submit" value="Sign Up" ng-disabled="form.$invalid">
+    </fieldset>
+  </form>
+  <section id="member-table-section">
+    <table id="member-table">
+      <thead>
+      <tr>
+        <th>username</th>
+        <th>password</th>
+        <th>email</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="user in users track by $index">
+        <td>{{ user.username }}</td>
+        <td>{{ user.password }}</td>
+        <td>{{ user.email }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+{% endblock %}

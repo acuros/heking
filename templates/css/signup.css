@@ -1,0 +1,7 @@
+#member-table {
+    width: 500px;
+}
+#member-table td, #member-table th {
+    border: 1px solid #333;
+    text-align: center;
+}
