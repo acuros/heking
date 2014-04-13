@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head lang="ko">
   <meta charset="UTF-8">
   <meta name="author" content="Acuros">
   <title>Hacking education kit for beginner</title>

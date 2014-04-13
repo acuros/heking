@@ -1,0 +1,39 @@
+{% extends "SQLInjection/base.tpl" %}
+{% block main %}
+<script src="/js/sqlinjection.js"></script>
+<div ng-controller="MemberController">
+  <form name="form" id="login-form" ng-submit="login(user)">
+    <fieldset>
+      <legend>로그인</legend>
+      <dl>
+        <dt><label for="username">아이디</label></dt>
+        <dd><input type="text" id="username" ng-model="user.username" required="required"></dd>
+        <dt><label for="password">비밀번호</label></dt>
+        <dd><input type="password" id="password" ng-model="user.password" required="required" ></dd>
+      </dl>
+      <input type="submit" value="로그인">
+      <pre>
+        사용자정보에서 정보를 가져온다.
+        조건: 아이디가 '{{ user.username }}' 이면서 비밀번호가 '{{ user.password }}'
+      </pre>
+    </fieldset>
+  </form>
+  <table id="member-table">
+    <caption>사용자정보</caption>
+    <thead>
+    <tr>
+      <th>아이디</th>
+      <th>비밀번호</th>
+      <th>이메일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="user in users track by $index">
+      <td>{{ user.username }}</td>
+      <td>{{ user.password }}</td>
+      <td>{{ user.email }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}

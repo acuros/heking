@@ -1,8 +1,11 @@
+#-*-coding:utf8-*-
 import os
 import sys
 from jinja2 import Environment, FileSystemLoader
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 def get_templates():
